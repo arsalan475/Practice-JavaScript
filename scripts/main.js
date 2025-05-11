@@ -41,9 +41,26 @@ document
   .getElementById("calendar-grid")
   .addEventListener("click", handleAddStreak);
 
-document.getElementById("next-month").addEventListener("click", () => {
+  const nextMonthBtn = document.getElementById("next-month")
+  const previousMonthBtn = document.getElementById("back")
+
+  nextMonthBtn.addEventListener("click", () => {
+    previousMonthBtn.classList.remove('stop-backward')
   calendarViewConfig.currentMonthIndex =
     (calendarViewConfig.currentMonthIndex + 1) % 12;
+  renderCalendarView();
+});
+
+
+previousMonthBtn.addEventListener("click", () => {
+if(calendarViewConfig.currentMonthIndex === 1) {
+  previousMonthBtn.classList.add('stop-backward')
+  
+}
+
+  calendarViewConfig.currentMonthIndex =
+    (calendarViewConfig.currentMonthIndex - 1) % 12;
+
   renderCalendarView();
 });
 
@@ -68,10 +85,10 @@ function getGradientByDate() {
   const seed = (day + 1) * (month + 1);
 
   // Generate hue values from seed
-  const hue1 = (seed * 97) % 360;
-  const hue2 = (hue1 + 60) % 360;
+  const hue1 = (seed * 10) % 360;
+  const hue2 = (hue1 + 70) % 360;
 
-  return `linear-gradient(145deg, hsl(${hue1}, 10%, 30%), hsl(${hue2}, 10%, 20%))`;
+  return `linear-gradient(145deg, hsl(${hue1}, 60%, 10%), hsl(${hue2}, 70%, 0%))`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -132,7 +149,8 @@ function renderMonth(monthObj, container,fullYearMode) {
 
     if(fullYearMode){
       const monthName = document.createElement('h3')
-      monthName.textContent = `${monthObj.name} ${calendar.year}`;
+      // monthName.textContent = `${monthObj.name} ${calendar.year}`;
+      monthName.textContent = `${monthObj.name}`;
       grid.prepend(monthName)
       document.getElementById('month-name').textContent = ''
     }else{
@@ -334,6 +352,7 @@ function saveToLocalStorage(value){
 
 function renderGoals(value){
 
+  if(value === '') return
     // if(!value) return
 
     
