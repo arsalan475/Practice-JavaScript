@@ -420,6 +420,14 @@ function createGoalElment(value,id){
 }
 
 
+function showAndHideCalendar(){
+     const data =  JSON.parse(localStorage.getItem('data')) || []
+      
+      if(!(data.length > 0)) return
+      
+      calendarContainer.classList.toggle('hidden')
+      home.classList.toggle('hidden')
+}
 
 
 btn.addEventListener('click' , ()=>renderGoals(inputValue.value))
@@ -443,6 +451,7 @@ btn.addEventListener('click' , ()=>renderGoals(inputValue.value))
           
           
           localStorage.setItem('documentId',id)
+          showAndHideCalendar()
             renderCalendarView()
             updateLongestStreak()
           
@@ -535,12 +544,9 @@ console.log('run')
   
   calendarContainer.classList.add('hidden')
   
+
+
   showCalenderBtn.addEventListener('click',function(){
-      const data =  JSON.parse(localStorage.getItem('data')) || []
-      
-      if(!(data.length > 0)) return
-      
-      calendarContainer.classList.toggle('hidden')
-      home.classList.toggle('hidden')
+     showAndHideCalendar()
 
   })
