@@ -324,17 +324,24 @@
       overflow-x: auto;
     
     }
-<<<<<<< HEAD
     .header { font-size: 0.5rem; padding: 0.3rem 0.6rem;}
     .day { font-size: .4rem; padding: 0.1rem; }
     .goal-input-field { font-size: 0.6rem; padding: 0.4rem; }
     button { padding: 0.5rem 0.8rem; font-size: 0.45rem; }
-=======
-    .header { font-size: 0.7rem; }
-    .day { font-size: 0.5rem; padding: 0.3rem; }
-    .goal-input-field { font-size: 0.85rem; padding: 0.6rem; }
-    button { padding: 0.5rem 0.8rem; font-size: 0.75rem; }
->>>>>>> 2f878fad74d9d9238781a9d380f00b05dc70e69f
+  }
+
+  span{
+    font-size: .5rem;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  -webkit-text-fill-color:white
+  }
+
+
+  .hidden{
+    display: none;
+
   }
   
 
