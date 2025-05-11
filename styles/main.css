@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem;
     color: #e5e7eb;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   }
@@ -35,11 +35,16 @@
   
   #calendar-container h2 {
     font-size: 2rem;
+    
     margin-bottom: 1.5rem;
     background: linear-gradient(to right, #60a5fa, #3b82f6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: fadeSlideDown 0.6s ease-in-out;
+  }
+
+  #calendar-container h3{
+    font-size: 2rem;
   }
   
   #calendar-grid {
@@ -115,6 +120,13 @@
     opacity: 0.6;
   }
   
+  .stop-backward{
+     background: #819bc9 !important;
+    color: #718096;
+    pointer-events: none;
+    opacity: 0.5 !important;
+  }
+  
   /* ========== Buttons ========== */
   button {
     border: none;
@@ -168,7 +180,8 @@
   
   /* ========== Home Section ========== */
   .home {
-    background: linear-gradient(135deg, #2d3748, #1a202c);
+    background: linear-gradient(135deg, #222b3b, #455169);
+    margin-bottom: 1rem;
     border-radius: 16px;
     padding: 2rem;
     width: 100%;
@@ -276,32 +289,52 @@
       flex-direction: column;
       align-items: flex-start;
       width: 100%;
+      padding: .4rem 2rem;
+    }
+
+    .goal-text{
+      font-size:.8rem;
+      border-bottom: 2px solid white;
+      padding: .5rem 1rem;
     }
     .goals-btn-container {
       width: 100%;
-      justify-content: flex-start;
+      justify-content: flex-end;
       margin-top: 0.5rem;
     }
   }
   
   @media (max-width: 480px) {
-    .header { font-size: 0.75rem; }
-    .day { font-size: 0.7rem; padding: 0.6rem; }
-    #calendar-container h2 { font-size: 1.6rem; }
+    .header { font-size: 0.6rem; padding: 0.3rem 0.5rem;}
+    .day { font-size: 0.7rem; padding: 0.4rem; }
+    #calendar-container h2{ font-size: 1rem; }
+    #calendar-container h3{ font-size: .6rem; }
+        .goal-input-field { font-size: 0.6rem; padding: 0.4rem; }
+    button { padding: 0.5rem 0.8rem; font-size: 0.45rem; }
+    .home{padding:.5rem .9rem;}
     .home h1 { font-size: 1.8rem; }
+    
   }
   
-  @media (max-width: 330px) {
+  @media (max-width: 340px) {
     body { padding: 1rem; }
     #calendar-container {
       padding: .5rem;
       margin-bottom: 1rem;
       overflow-x: auto;
+    
     }
+<<<<<<< HEAD
+    .header { font-size: 0.5rem; padding: 0.3rem 0.6rem;}
+    .day { font-size: .4rem; padding: 0.1rem; }
+    .goal-input-field { font-size: 0.6rem; padding: 0.4rem; }
+    button { padding: 0.5rem 0.8rem; font-size: 0.45rem; }
+=======
     .header { font-size: 0.7rem; }
     .day { font-size: 0.5rem; padding: 0.3rem; }
     .goal-input-field { font-size: 0.85rem; padding: 0.6rem; }
     button { padding: 0.5rem 0.8rem; font-size: 0.75rem; }
+>>>>>>> 2f878fad74d9d9238781a9d380f00b05dc70e69f
   }
   
 
