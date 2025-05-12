@@ -1,7 +1,9 @@
 
 
   const showCalenderBtn = document.getElementById('show-calendar')
-
+ const calendarContainer = document.getElementById('calendar-container');
+  const home = document.querySelector('.home')
+  
 let streak = getDataFromServer("streak");
 let calendarViewConfig = { fullYearMode: false, currentMonthIndex: new Date().getMonth() };
 const calendar = generateCalendar();
@@ -100,14 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('✅ Service Worker registered:', reg.scope))
-      .catch(err => console.error('❌ Service Worker registration failed:', err));
-  });
-}
-
 
 
 function currentGoalContent(id){
@@ -157,6 +151,7 @@ function renderMonth(monthObj, container,fullYearMode) {
 
       const data = currentGoalContent(documentId)
     console.log(data,documentId)
+    handleHideBtn()
   // localStorage.setItem(`previousBestStreak@${documentId}`,0)
   
   const streak = getDataFromServer('streak')
@@ -239,7 +234,7 @@ function createTickIcon(appendTo){
   const tick = document.createElement('span');
   tick.textContent = '✔';
   tick.className = 'tick';
-  tick.style.marginLeft = '5px';
+  tick.style.marginLeft = '3px';
   appendTo.appendChild(tick);
 }
 
@@ -358,7 +353,8 @@ function getDataFromLocalStorage(){
 let data = getDataFromLocalStorage()
 
 function saveToLocalStorage(value){
-    
+ 
+
    const goalData = {
     content:value,
     id:Math.random()*10000
@@ -376,15 +372,14 @@ function saveToLocalStorage(value){
 function renderGoals(value){
 
   if(value === '') return
-    // if(!value) return
 
     
-    const {id} =saveToLocalStorage(value)
+    const {id} = saveToLocalStorage(value)
     createGoalElment(value,id)
     handleHideBtn()
     
-    
   
+  inputValue.value = ''
 }
 
 function createGoalElment(value,id){
@@ -417,6 +412,9 @@ function createGoalElment(value,id){
     
     
     goalsContainer.append(div)
+
+           
+
 }
 
 
@@ -427,6 +425,7 @@ function showAndHideCalendar(){
       
       calendarContainer.classList.toggle('hidden')
       home.classList.toggle('hidden')
+      handleHideBtn()
 }
 
 
@@ -445,7 +444,8 @@ btn.addEventListener('click' , ()=>renderGoals(inputValue.value))
           data = data.filter(dt => dt.id !== +id)
           localStorage.setItem('data',JSON.stringify(data))
           e.target.closest('.goals').remove()
-          handleHideBtn()
+              localStorage.removeItem('documentId')
+              handleHideBtn()
         }else if(setStreak){
           const id = e.target.dataset.id;
           
@@ -525,22 +525,30 @@ function generateCalendar(year = new Date().getFullYear()) {
   });
 
   
-  const calendarContainer = document.getElementById('calendar-container');
-  const home = document.querySelector('.home')
-  
+ 
   
   function handleHideBtn(){
-         const data =  JSON.parse(localStorage.getItem('data')) || []
-          if(!(data.length > 0)){
+
+       const id =  localStorage.getItem('documentId');
+          if(!id){
             showCalenderBtn.classList.add('hidden')
             return
         } 
+
+        
+
+        if(home.classList.contains('hidden')) {
+          showCalenderBtn.textContent = 'hide Calender'
+        }else{
+          showCalenderBtn.textContent = 'show Calender'
+
+        }
         showCalenderBtn.classList.remove('hidden')
-     
-console.log('run')
+    
   }
 
-  handleHideBtn()
+    handleHideBtn()
+  
   
   calendarContainer.classList.add('hidden')
   
@@ -550,3 +558,12 @@ console.log('run')
      showAndHideCalendar()
 
   })
+
+
+  if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('✅ Service Worker registered:', reg.scope))
+      .catch(err => console.error('❌ Service Worker registration failed:', err));
+  });
+}
